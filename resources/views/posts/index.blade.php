@@ -3,9 +3,9 @@
 @section('content')
     <main>
         <div class="container">
-            <nav class="panel panel-default">
-                <div class="panel-heading">投稿一覧</div>
-                <div class="panel-body">
+            <nav class="card">
+                <div class="card-body">
+                    <h2 class="card-title">投稿の一覧</h2>
                     <div class="list-group">
                         @foreach($posts as $post)
                             <div class="list-group-item">
@@ -21,3 +21,5 @@
         </div>
     </main>
 @endsection
+
+<!-- 投稿作成機能を作ろう -->
