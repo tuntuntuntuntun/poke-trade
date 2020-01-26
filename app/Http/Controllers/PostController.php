@@ -56,4 +56,22 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function showDeleteForm(int $post_id)
+    {
+        $post = Post::find($post_id);
+
+        return view('posts/delete', [
+            'post' => $post,
+        ]);
+    }
+
+    public function delete(int $post_id)
+    {
+        $post = Post::find($post_id);
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
+    }
 }
