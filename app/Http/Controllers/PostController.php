@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Http\Requests\CreatePost;
+use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -31,6 +32,27 @@ class PostController extends Controller
         $posts->give = $request->give;
 
         $posts->save();
+
+        return redirect()->route('posts.index');
+    }
+
+    public function showEditForm(int $post_id)
+    {
+        $post = Post::find($post_id);
+
+        return view('posts/edit', [
+            'post' => $post,
+        ]);
+    }
+
+    public function edit(int $post_id, EditPost $request)
+    {
+        $post = Post::find($post_id);
+
+        $post->want = $request->want;
+        $post->give = $request->give;
+
+        $post->save();
 
         return redirect()->route('posts.index');
     }
