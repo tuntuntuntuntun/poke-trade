@@ -18,3 +18,6 @@ Route::post('/posts/create', 'PostController@create');
 
 Route::get('/posts/{post_id}/edit', 'PostController@showEditForm')->name('posts.edit');
 Route::post('/posts/{post_id}/edit', 'PostController@edit');
+
+Route::get('/posts/{post_id}/delete', 'PostController@showDeleteForm')->name('posts.delete');
+Route::post('/posts/{post_id}/delete', 'PostController@delete');
