@@ -12,7 +12,7 @@
 <body>
     <header class="mb-4">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ポケモントレード</a>
+            <a class="navbar-brand" href="{{ route('posts.index') }}">ポケモントレード</a>
             <a href="{{ route('posts.create') }}" class="text-secondary">投稿する</a>
         </nav>
     </header>
