@@ -15,8 +15,8 @@
 
                         @if(Auth::check())
                             @if(Auth::user()->id === $post->user_id)
-                                <a href="{{ route('posts.edit', ['post_id' => $post->id]) }}">編集する</a>
-                                <a href="{{ route('posts.delete', ['post_id' => $post->id]) }}">削除する</a>
+                                <a href="{{ route('posts.edit', ['post' => $post->id]) }}">編集する</a>
+                                <a href="{{ route('posts.delete', ['post' => $post->id]) }}">削除する</a>
                             @endif
                         @endif
                     </div>      

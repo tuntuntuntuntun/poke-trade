@@ -39,19 +39,15 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function showEditForm(int $post_id)
+    public function showEditForm(Post $post)
     {
-        $post = Post::find($post_id);
-
         return view('posts/edit', [
             'post' => $post,
         ]);
     }
 
-    public function edit(int $post_id, EditPost $request)
+    public function edit(Post $post, EditPost $request)
     {
-        $post = Post::find($post_id);
-
         $post->want = $request->want;
         $post->give = $request->give;
 
@@ -60,19 +56,15 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function showDeleteForm(int $post_id)
+    public function showDeleteForm(Post $post)
     {
-        $post = Post::find($post_id);
-
         return view('posts/delete', [
             'post' => $post,
         ]);
     }
 
-    public function delete(int $post_id)
+    public function delete(Post $post)
     {
-        $post = Post::find($post_id);
-
         $post->delete();
 
         return redirect()->route('posts.index');

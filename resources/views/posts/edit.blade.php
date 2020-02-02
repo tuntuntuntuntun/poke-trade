@@ -9,7 +9,7 @@
                 @endforeach
             </div>
         @endif
-        <form action="{{ route('posts.edit', ['post_id' => $post->id]) }}" method="post">
+        <form action="{{ route('posts.edit', ['post' => $post->id]) }}" method="post">
             @csrf
             <div class="form-group">
                 <label for="want">欲しいポケモン</label>
