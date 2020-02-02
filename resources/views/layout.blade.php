@@ -13,9 +13,33 @@
     <header class="mb-4">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ route('posts.index') }}">ポケモントレード</a>
-            <a href="{{ route('posts.create') }}" class="text-secondary">投稿する</a>
+            <div>
+                @if(Auth::check())
+                    <a href="{{ route('mypage') }}" class="my-navbar-item">{{ Auth::user()->name }}さんのマイページ</a>
+                    |
+                    <a href="{{ route('posts.create') }}" class="text-secondary">投稿する</a>
+                    |
+                    <a href="#" id="logout" class="mybar-item">ログアウト</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
+                        @csrf
+                    </form>
+                @else
+                        <a id="login" class="mybar-item" href="{{ route('login') }}">ログイン</a>
+                        ｜
+                        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+                @endif
+            </div>
         </nav>
     </header>
     @yield('content')
+
+    @if(Auth::check())
+        <script>
+            document.getElementById('logout').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('logout-form').submit();
+            });
+        </script>
+    @endif
 </body>
 </html>

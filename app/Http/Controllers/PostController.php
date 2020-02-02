@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Post;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index()
     {
-        // 投稿を全て取得
+        $users = User::all();
         $posts = Post::all();
 
-        return view('posts/index', [
+        return view('posts/index', [  
+            'users' => $users,
             'posts' => $posts,
         ]);
     }
@@ -31,7 +34,7 @@ class PostController extends Controller
         $posts->want = $request->want;
         $posts->give = $request->give;
 
-        $posts->save();
+        Auth::user()->posts()->save($posts);
 
         return redirect()->route('posts.index');
     }
