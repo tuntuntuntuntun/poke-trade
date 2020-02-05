@@ -13,11 +13,14 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = DB::table('users')->first();
+
         $wants = ['ヒトカゲ', 'ヒヒダルマ', 'ドラパルト'];
         $gives = ['メッソン', 'エースバーン', 'コイキング'];
 
         foreach (array_map(null, $wants, $gives) as [$want, $give]) {
             DB::table('posts')->insert([
+                'user_id' => $user->id,
                 'want' => $want,
                 'give' => $give,
                 'created_at' => Carbon::now(),

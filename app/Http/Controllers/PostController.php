@@ -2,19 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Post;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // 投稿を全て取得
-        $posts = Post::all();
+        $users = User::all();
 
-        return view('posts/index', [
+        $query = Post::query();
+
+        if ($request->has('want')) {
+            $query->where('want', 'like', '%'.$request->get('want').'%');
+        }
+        
+        if ($request->has('give')) {
+            $query->where('give', 'like', '%'.$request->get('give').'%');
+        }
+            
+        if (is_null($request->want) && is_null($request->give)) {
+            // 欲しいポケモン、譲るポケモンともに値がない場合
+            $posts = Post::paginate(3);
+        } else {
+            $posts = $query->paginate(1);
+        }
+
+        return view('posts/index', [  
+            'users' => $users,
             'posts' => $posts,
         ]);
     }
@@ -31,24 +50,20 @@ class PostController extends Controller
         $posts->want = $request->want;
         $posts->give = $request->give;
 
-        $posts->save();
+        Auth::user()->posts()->save($posts);
 
         return redirect()->route('posts.index');
     }
 
-    public function showEditForm(int $post_id)
+    public function showEditForm(Post $post)
     {
-        $post = Post::find($post_id);
-
         return view('posts/edit', [
             'post' => $post,
         ]);
     }
 
-    public function edit(int $post_id, EditPost $request)
+    public function edit(Post $post, EditPost $request)
     {
-        $post = Post::find($post_id);
-
         $post->want = $request->want;
         $post->give = $request->give;
 
@@ -57,21 +72,22 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function showDeleteForm(int $post_id)
+    public function showDeleteForm(Post $post)
     {
-        $post = Post::find($post_id);
-
         return view('posts/delete', [
             'post' => $post,
         ]);
     }
 
-    public function delete(int $post_id)
+    public function delete(Post $post)
     {
-        $post = Post::find($post_id);
-
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+
+    public function showSearchForm()
+    {
+        return view('posts.search');
     }
 }

@@ -9,7 +9,7 @@
                     <li>譲るポケモン: {{ $post->give }}</li>
                 </ul>
                 <div class="col-3 text-right">
-                    <form action="{{ route('posts.delete', ['post_id' => $post->id]) }}" method="post">
+                    <form action="{{ route('posts.delete', ['post' => $post->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-danger">削除する</button>
                     </form>

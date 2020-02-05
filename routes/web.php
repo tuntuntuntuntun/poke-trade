@@ -11,13 +11,26 @@
 |
 */
 
+
 Route::get('/', 'PostController@index')->name('posts.index');
 
-Route::get('/posts/create', 'PostController@showCreateForm')->name('posts.create');
-Route::post('/posts/create', 'PostController@create');
+Route::get('/posts/search', 'PostController@showSearchForm')->name('posts.search');
 
-Route::get('/posts/{post_id}/edit', 'PostController@showEditForm')->name('posts.edit');
-Route::post('/posts/{post_id}/edit', 'PostController@edit');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/posts/create', 'PostController@showCreateForm')->name('posts.create');
+    Route::post('/posts/create', 'PostController@create');
+    
+    Route::get('/mypage', 'MyPageController@showMyPage')->name('mypage');
+    
+    Route::group(['middleware' => 'can:view,post'], function() {
+        Route::get('/posts/{post}/edit', 'PostController@showEditForm')->name('posts.edit');
+        Route::post('/posts/{post}/edit', 'PostController@edit');
+        
+        Route::get('/posts/{post}/delete', 'PostController@showDeleteForm')->name('posts.delete');
+        Route::post('/posts/{post}/delete', 'PostController@delete');
+    });
 
-Route::get('/posts/{post_id}/delete', 'PostController@showDeleteForm')->name('posts.delete');
-Route::post('/posts/{post_id}/delete', 'PostController@delete');
+});
+
+Auth::routes();
+
