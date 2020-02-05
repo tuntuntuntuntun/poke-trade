@@ -15,7 +15,9 @@
             <a class="navbar-brand" href="{{ route('posts.index') }}">ポケモントレード</a>
             <div>
                 @if(Auth::check())
-                    <a href="{{ route('mypage') }}" class="my-navbar-item">{{ Auth::user()->name }}さんのマイページ</a>
+                    <a href="{{ route('mypage') }}" class="my-navbar-item text-secondary">{{ Auth::user()->name }}さんのマイページ</a>
+                    |
+                    <a href="{{ route('posts.search') }}" class="text-secondary">検索</a>
                     |
                     <a href="{{ route('posts.create') }}" class="text-secondary">投稿する</a>
                     |
@@ -24,9 +26,11 @@
                         @csrf
                     </form>
                 @else
-                        <a id="login" class="mybar-item" href="{{ route('login') }}">ログイン</a>
-                        ｜
-                        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+                    <a href="{{ route('posts.search') }}" class="text-secondary">検索</a>
+                    |
+                    <a id="login" class="mybar-item" href="{{ route('login') }}">ログイン</a>
+                    |
+                    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
                 @endif
             </div>
         </nav>

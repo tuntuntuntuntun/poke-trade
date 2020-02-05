@@ -11,10 +11,26 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all();
-        $posts = Post::all();
+
+        $query = Post::query();
+
+        if ($request->has('want')) {
+            $query->where('want', 'like', '%'.$request->get('want').'%');
+        }
+        
+        if ($request->has('give')) {
+            $query->where('give', 'like', '%'.$request->get('give').'%');
+        }
+            
+        if (is_null($request->want) && is_null($request->give)) {
+            // 欲しいポケモン、譲るポケモンともに値がない場合
+            $posts = Post::paginate(3);
+        } else {
+            $posts = $query->paginate(1);
+        }
 
         return view('posts/index', [  
             'users' => $users,
@@ -68,5 +84,10 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+
+    public function showSearchForm()
+    {
+        return view('posts.search');
     }
 }

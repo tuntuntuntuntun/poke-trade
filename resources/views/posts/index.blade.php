@@ -4,6 +4,16 @@
     <main>
         <div class="container">
             <h2 class="card-title">投稿の一覧</h2>
+
+            <!-- 検索したときのみ表示 -->
+            @if(!(is_null(Request::get('want')) && is_null(Request::get('give'))))
+                <p>検索件数: {{ $posts->total() }}件</p>
+                
+                @if($posts->total() === 0)
+                    <a href="{{ route('posts.index') }}">トップページに戻る</a>
+                @endif
+            @endif
+
             <div class="list-group">
                 @foreach($posts as $post)
                     <div class="list-group-item mt-3">
@@ -21,6 +31,7 @@
                         @endif
                     </div>      
                 @endforeach
+                <p>{{ $posts->appends(['want' => Request::get('want'), 'give' => Request::get('give')])->links() }}</p>
             </div>
         </div>
     </main>
