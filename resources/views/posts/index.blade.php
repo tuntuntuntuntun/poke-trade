@@ -17,7 +17,8 @@
             <div class="list-group">
                 @foreach($posts as $post)
                     <div class="list-group-item mt-3">
-                        投稿者: {{ $post->user->name }}
+                        <p>投稿者: {{ $post->user->name }}</p>
+                        <p><a href="{{ route('posts.detail', ['post' => $post]) }}">この投稿を見る</a></p>
                         <ul>
                             <li>欲しいポケモン: {{ $post->want }}</li>
                             <li>譲るポケモン: {{ $post->give }}</li>
