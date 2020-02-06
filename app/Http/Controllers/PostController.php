@@ -28,9 +28,9 @@ class PostController extends Controller
             
         if (is_null($request->want) && is_null($request->give)) {
             // 欲しいポケモン、譲るポケモンともに値がない場合
-            $posts = Post::paginate(3);
+            $posts = Post::paginate(10);
         } else {
-            $posts = $query->paginate(1);
+            $posts = $query->paginate(10);
         }
 
         return view('posts/index', [  
