@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Post;
+use App\Comment;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
@@ -88,6 +89,16 @@ class PostController extends Controller
 
     public function showSearchForm()
     {
-        return view('posts.search');
+        return view('posts/search');
+    }
+
+    public function showDetail(Post $post, Comment $comment)
+    {
+        $comments = Comment::where('post_id', $post->id)->orderBy('created_at', 'desc')->get();
+
+        return view('posts/detail', [
+            'post' => $post,
+            'comments' => $comments,
+        ]);
     }
 }
