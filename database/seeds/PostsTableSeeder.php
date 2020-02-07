@@ -25,6 +25,7 @@ class PostsTableSeeder extends Seeder
                 'give' => $give,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'title' => '4v以上求む'
             ]);
         }
     }

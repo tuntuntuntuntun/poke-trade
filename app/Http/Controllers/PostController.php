@@ -48,6 +48,7 @@ class PostController extends Controller
     {
         $posts = new Post();
 
+        $posts->title = $request->title;
         $posts->want = $request->want;
         $posts->give = $request->give;
 
@@ -65,6 +66,7 @@ class PostController extends Controller
 
     public function edit(Post $post, EditPost $request)
     {
+        $posts->title = $request->title;
         $post->want = $request->want;
         $post->give = $request->give;
 
