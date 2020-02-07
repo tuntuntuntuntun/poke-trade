@@ -28,9 +28,9 @@ class PostController extends Controller
             
         if (is_null($request->want) && is_null($request->give)) {
             // 欲しいポケモン、譲るポケモンともに値がない場合
-            $posts = Post::paginate(10);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         } else {
-            $posts = $query->paginate(10);
+            $posts = $query->orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('posts/index', [  
@@ -66,7 +66,7 @@ class PostController extends Controller
 
     public function edit(Post $post, EditPost $request)
     {
-        $posts->title = $request->title;
+        $post->title = $request->title;
         $post->want = $request->want;
         $post->give = $request->give;
 
