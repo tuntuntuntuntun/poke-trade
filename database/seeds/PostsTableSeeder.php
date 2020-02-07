@@ -15,8 +15,8 @@ class PostsTableSeeder extends Seeder
     {
         $user = DB::table('users')->first();
 
-        $wants = ['ヒトカゲ', 'ヒヒダルマ', 'ドラパルト'];
-        $gives = ['メッソン', 'エースバーン', 'コイキング'];
+        $wants = ['ヒトカゲ', 'ヒヒダルマ', 'ドラパルト', 'ダルマッカ'];
+        $gives = ['メッソン', 'エースバーン', 'コイキング', 'ドラメシヤ'];
 
         foreach (array_map(null, $wants, $gives) as [$want, $give]) {
             DB::table('posts')->insert([
