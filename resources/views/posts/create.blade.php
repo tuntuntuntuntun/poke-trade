@@ -26,8 +26,8 @@
                     <label for="give">譲るポケモン</label>
                     <input type="text" id="give" name="give" class="form-control" value="{{ old('give') }}">
                 </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">投稿する</button>
+                <div class="text-center">
+                    <button type="submit" class="btn">投稿する</button>
                 </div>
             </form>
         </div>

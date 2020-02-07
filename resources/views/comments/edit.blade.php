@@ -18,8 +18,8 @@
                     <label for="content">コメント</label>
                     <textarea name="content" id="content" cols="20" rows="5" class="form-control">{{ $comment->content }}</textarea>
                 </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">変更する</button>
+                <div class="text-center">
+                    <button type="submit" class="btn">変更する</button>
                 </div>
             </form>
         </div>
