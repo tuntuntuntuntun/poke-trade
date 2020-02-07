@@ -3,7 +3,10 @@
 @section('content')
     <main>
         <div class="container">
-            @include('share.post')
+            <div class="mt-3 card">
+                @include('share.post')
+                @include('share.auth')
+            </div>
             <div class="mt-5">
                 <a href="{{ route('comments.create', ['post' => $post->id]) }}" class="d-block btn">コメントをする</a>
             </div>
