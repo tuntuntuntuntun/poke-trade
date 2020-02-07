@@ -22,14 +22,14 @@
                     <label for="password">パスワード</label>
                     <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">送信</button>
+                <div class="text-center">
+                    <button type="submit" class="btn">送信</button>
                 </div>
                 </form>
             </div>
         </div>
         <div class="mt-3 text-center">
-            <a href="{{ route('password.request') }}">パスワードの変更はこちらから</a>
+            <a href="{{ route('password.request') }}" style="color:black">パスワードの変更はこちらから</a>
         </div>
     </div>
 @endsection

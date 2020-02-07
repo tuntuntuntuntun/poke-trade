@@ -12,8 +12,8 @@
                     <label for="give">譲るポケモン</label>
                     <input type="text" name="give" class="form-control">
                 </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">検索</button>
+                <div class="text-center">
+                    <button type="submit" class="btn">検索</button>
                 </div>
             </form>
         </div>
