@@ -15,7 +15,10 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <button type="submit" class="btn">削除する</button>
+                <form action="{{ route('posts.delete', ['post' => $post->id]) }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn">削除する</button>
+                </form>
             </div>
         </div>
     </main>

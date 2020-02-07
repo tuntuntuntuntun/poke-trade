@@ -18,8 +18,8 @@
                     <label for="content">コメント</label>
                     <textarea name="content" id="content" cols="20" rows="5" class="form-control">{{ old('content') }}</textarea>
                 </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">投稿する</button>
+                <div class="text-center">
+                    <button type="submit" class="btn">投稿する</button>
                 </div>
 
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
