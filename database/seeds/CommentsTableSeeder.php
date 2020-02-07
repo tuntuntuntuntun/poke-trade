@@ -13,11 +13,11 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1, 5) as $num) {
+        foreach (range(1,4) as $num) {
             DB::table('comments')->insert([
-                'post_id' => 4,
-                'content' => "かっきくけっこ{$num}",
-                'user_id' => 1,
+                'post_id' => $num,
+                'content' => "コメント{$num}",
+                'user_id' => $num,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
