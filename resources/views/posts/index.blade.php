@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <div class="container">
-            <h2 class="card-title">投稿の一覧</h2>
+            <h2>投稿の一覧</h2>
 
             <!-- 検索したときのみ表示 -->
             @if(!(is_null(Request::get('want')) && is_null(Request::get('give'))))
@@ -14,9 +14,10 @@
                 @endif
             @endif
 
-            <div class="list-group">
-                @foreach($posts as $post)
-                    <div class="list-group-item mt-3">
+            @foreach($posts as $post)
+                <div class="card">
+                    <div class="card-body mt-3">
+                        {{ $post->title }}
                         <p><a href="{{ route('posts.detail', ['post' => $post]) }}">この投稿を見る</a></p>
                         <p>{{ $post->created_at->format('Y年n月j日 H時i分') }}</p>
                         <p>投稿者: {{ $post->user->name }}</p>
@@ -32,9 +33,9 @@
                             @endif
                         @endif
                     </div>      
-                @endforeach
-                <p>{{ $posts->appends(['want' => Request::get('want'), 'give' => Request::get('give')])->links() }}</p>
-            </div>
+                    <p>{{ $posts->appends(['want' => Request::get('want'), 'give' => Request::get('give')])->links() }}</p>
+                </div>
+            @endforeach
         </div>
     </main>
 @endsection
