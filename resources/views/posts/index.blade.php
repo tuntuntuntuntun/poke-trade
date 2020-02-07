@@ -2,6 +2,7 @@
 
 @section('styles')
     <style>
+        /* ページネーションのスタイル */
         main nav a, nav span {
             color: black!important;
         }
@@ -25,7 +26,12 @@
             @endif
 
             @foreach($posts as $post)
-                @include('share.post')
+                <div class="mb-4 card">
+                    <a href="{{ route('posts.detail', ['post' => $post->id]) }}">
+                        @include('share.post')
+                        @include('share.auth')
+                    </a>
+                </div>
             @endforeach
             <p>{{ $posts->appends(['want' => Request::get('want'), 'give' => Request::get('give')])->links() }}</p>
         </div>
