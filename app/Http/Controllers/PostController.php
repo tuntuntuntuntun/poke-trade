@@ -84,8 +84,10 @@ class PostController extends Controller
 
     public function delete(Post $post)
     {
-        $post->delete();
-        $comment->delete();
+        \DB::transaction(function() use ($post) {
+            $post->comment()->delete();
+            $post->delete();
+        });
 
         return redirect()->route('posts.index');
     }
